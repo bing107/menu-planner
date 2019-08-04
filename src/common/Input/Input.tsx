@@ -1,7 +1,13 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent } from 'react';
 
-const Input: FunctionComponent = () => {
-  return <input type="text" name="input" />;
+type InputPropsType = {
+  handleChange?: (event: React.ChangeEvent) => void;
+  label?: string;
+  name?: string;
+};
+
+const Input: FunctionComponent<InputPropsType> = ({ handleChange }) => {
+  return <input type="text" name="input" onChange={handleChange} />;
 };
 
 export default Input;
