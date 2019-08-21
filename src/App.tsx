@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import axios from 'axios';
-import * as toxicity from '@tensorflow-models/toxicity';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import axios from "axios";
+import * as toxicity from "@tensorflow-models/toxicity";
 
 const App: React.FC = () => {
   const [tweets = [], setTweets] = useState<any>([]);
 
   useEffect(() => {
     const fetchFoo: any = async () => {
-      const result: any = await axios('https://api.icndb.com/jokes/random/10?limitTo=[explicit]');
+      const result: any = await axios(
+        "https://api.icndb.com/jokes/random/10?limitTo=[explicit,nerdy]"
+      );
       setTweets(result.data.value);
     };
     fetchFoo();
