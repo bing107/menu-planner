@@ -1,8 +1,16 @@
 import React from 'react';
-import { fireEvent, render, waitForElement, act } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  waitForElement,
+  act,
+  cleanup
+} from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import App from './App';
 import axiosMock from 'axios';
+
+afterEach(cleanup);
 
 jest.mock('@tensorflow-models/toxicity', () => {});
 
@@ -13,12 +21,7 @@ it('renders cta button', () => {
   expect(getByTestId('button-cta')).toHaveTextContent('Run Model');
 });
 
-it('displays loading text while fetching jokes', () => {
-  const { getByTestId } = renderApp();
-  expect(getByTestId('loading')).toHaveTextContent('Fetching jokes...');
-});
-
-it('displays a list of 10 jokes', () => {
+it('fetches and displays a list of jokes', async () => {
   //@ts-ignore
   axiosMock.get.mockResolvedValueOnce({
     data: {
@@ -27,4 +30,9 @@ it('displays a list of 10 jokes', () => {
   });
 
   const { getByTestId } = renderApp();
+  expect(getByTestId('loading')).toHaveTextContent('Fetching jokes...');
+
+  const resolvedJokeList = await waitForElement(() => getByTestId('joke-list'));
+
+  expect(resolvedJokeList).toHaveTextContent('asdsa');
 });

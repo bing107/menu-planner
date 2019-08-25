@@ -53,9 +53,13 @@ const App: React.FC = () => {
         </button>
         {!hasTweets && <span data-testid="loading">Fetching jokes...</span>}
         {hasTweets && (
-          <ul className="joke-list--container">
+          <ul data-testid="joke-list" className="joke-list--container">
             {tweets.map((item: any) => (
-              <li className="joke-list--joke" key={item.id}>
+              <li
+                data-testid={`joke-${item.id}`}
+                className="joke-list--joke"
+                key={item.id}
+              >
                 {item.joke}
               </li>
             ))}
