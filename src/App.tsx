@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import axios from "axios";
-import * as toxicity from "@tensorflow-models/toxicity";
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import axios from 'axios';
+import * as toxicity from '@tensorflow-models/toxicity';
 
 const App: React.FC = () => {
   const [tweets = [], setTweets] = useState<any>([]);
 
   useEffect(() => {
     const fetchFoo: any = async () => {
-      const result: any = await axios(
-        "https://api.icndb.com/jokes/random/10?limitTo=[explicit,nerdy]"
+      const result: any = await axios.get(
+        'https://api.icndb.com/jokes/random/10?limitTo=[explicit,nerdy]'
       );
       setTweets(result.data.value);
     };
@@ -18,7 +18,6 @@ const App: React.FC = () => {
 
   const clickHandler = () => {
     const threshold = 0.6;
-    console.log(tweets);
     // Load the model. Users optionally pass in a threshold and an array of
     // labels to include.
     //@ts-ignore
@@ -44,17 +43,24 @@ const App: React.FC = () => {
     });
   };
 
+  const hasTweets = tweets.length > 0;
+
   return (
     <div className="App">
       <header className="App-header">
-        <button onClick={clickHandler}>Calculate Toxicity</button>
-        <ul className="joke-list--container">
-          {tweets.map((item: any) => (
-            <li className="joke-list--joke" key={item.id}>
-              {item.joke}
-            </li>
-          ))}
-        </ul>
+        <button data-testid="button-cta" onClick={clickHandler}>
+          Run Model
+        </button>
+        {!hasTweets && <span data-testid="loading">Fetching jokes...</span>}
+        {hasTweets && (
+          <ul className="joke-list--container">
+            {tweets.map((item: any) => (
+              <li className="joke-list--joke" key={item.id}>
+                {item.joke}
+              </li>
+            ))}
+          </ul>
+        )}
       </header>
     </div>
   );
