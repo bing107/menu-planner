@@ -1,7 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
 [![Greenkeeper badge](https://badges.greenkeeper.io/bing107/menu-planner.svg)](https://greenkeeper.io/)
 
 In the project directory, you can run:
