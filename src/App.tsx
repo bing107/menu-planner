@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 import * as toxicity from '@tensorflow-models/toxicity';
+import { Carousel, Input } from './common';
 
 const App: React.FC = () => {
   const [tweets = [], setTweets] = useState<any>([]);
@@ -53,17 +54,19 @@ const App: React.FC = () => {
         </button>
         {!hasTweets && <span data-testid="loading">Fetching jokes...</span>}
         {hasTweets && (
-          <ul data-testid="joke-list" className="joke-list--container">
-            {tweets.map((item: any) => (
-              <li
-                data-testid={`joke-${item.id}`}
-                className="joke-list--joke"
-                key={item.id}
-              >
-                {item.joke}
-              </li>
-            ))}
-          </ul>
+          // <ul data-testid="joke-list" className="joke-list--container">
+          //   {tweets.map((item: any) => (
+          //     <li
+          //       data-testid={`joke-${item.id}`}
+          //       className="joke-list--joke"
+          //       key={item.id}
+          //     >
+          //       {item.joke}
+          //     </li>
+          //   ))}
+          // </ul>
+          // <Carousel items={tweets} />
+          <Input handleChange={() => console.log('change')} />
         )}
       </header>
     </div>

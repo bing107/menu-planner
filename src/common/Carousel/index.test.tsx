@@ -7,12 +7,12 @@ const baseProps = {
   items: [
     {
       id: 0,
-      title: 'some title',
+      joke: 'some title',
       imgUrl: ''
     },
     {
       id: 1,
-      title: 'some other title',
+      joke: 'some other title',
       imgUrl: ''
     }
   ]

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { StyledCardWrapper } from './styles';
+import { StyledCardWrapper, StyledCarouselContainer } from './styles';
 
 type CarouselPropType = {
   items: ReadonlyArray<CarouselItemType>;
@@ -7,24 +7,24 @@ type CarouselPropType = {
 
 type CarouselItemType = {
   id: number;
-  title: string;
+  joke: string;
   imgUrl: string;
 };
 
 const Carousel: FunctionComponent<CarouselPropType> = ({ items }) => {
   return (
-    <div data-testid="items-list">
+    <StyledCarouselContainer data-testid="items-list">
       {items.map(item => {
         return <Card key={item.id} data={item} />;
       })}
-    </div>
+    </StyledCarouselContainer>
   );
 };
 
 const Card: FunctionComponent<{ data: any }> = ({ data }) => {
   return (
     <StyledCardWrapper data-testid="card">
-      <span>{data.title}</span>
+      <span>{data.joke}</span>
     </StyledCardWrapper>
   );
 };
